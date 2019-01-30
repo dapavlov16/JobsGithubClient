@@ -6,12 +6,14 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Single;
+
 @Dao
 public interface VacancyDao {
 
     @Insert
-    void insertAll(Vacancy... vacancies);
+    void insertAll(List<Vacancy> vacancies);
 
     @Query("SELECT * FROM vacancy")
-    List<Vacancy> getAllVacancy();
+    Single<List<Vacancy>> getAllVacancy();
 }

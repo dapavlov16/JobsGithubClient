@@ -7,7 +7,11 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -19,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
+    private VacancyDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +43,29 @@ public class MainActivity extends AppCompatActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableSingleObserver<List<Vacancy>>() {
-                    //Уходит в onError :(
                     @Override
-                    public void onSuccess(List<Vacancy> vacancyList) {
+                    public void onSuccess(final List<Vacancy> vacancyList) {
                         recyclerView.setAdapter(new RecyclerViewAdapter(vacancyList));
+                        /* Пытаюсь записать лист в базу
+                        Completable.fromAction(new Action() {
+                            @Override
+                            public void run() throws Exception {
+                                db.getVacancyDao().insertAll(vacancyList);
+                            }
+                        }).subscribe(new CompletableObserver() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                            }
+                        });*/
                     }
                     @Override
                     public void onError(Throwable e) {
