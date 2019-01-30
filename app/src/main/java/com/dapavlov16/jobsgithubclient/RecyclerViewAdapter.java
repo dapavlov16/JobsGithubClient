@@ -16,7 +16,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VacancyHolder> {
     public RecyclerViewAdapter(/*List<Vacancy> vacancyList*/){
         this.vacancyList = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
-            vacancyList.add(new Vacancy("title" + i, "company " + i, "description" + "test" + 1));
+            vacancyList.add(new Vacancy(Integer.toString(i),"title" + i, "company " + i, "description" + "test" + 1));
         }
     }
 

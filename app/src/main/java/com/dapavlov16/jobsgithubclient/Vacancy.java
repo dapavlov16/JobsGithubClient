@@ -1,16 +1,25 @@
 package com.dapavlov16.jobsgithubclient;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class Vacancy {
-    //private String id;
+    @PrimaryKey private String id;
     //private String url;
     private String title;
     private String company;
     private String description;
 
-    public Vacancy(String title, String company, String description){
+    public Vacancy(String id, String title, String company, String description){
+        this.id = id;
         this.title = title;
         this.company = company;
         this.description = description;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -23,6 +32,10 @@ public class Vacancy {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setTitle(String title) {
