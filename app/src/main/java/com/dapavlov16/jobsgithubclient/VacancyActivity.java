@@ -17,5 +17,8 @@ public class VacancyActivity extends AppCompatActivity {
         title = findViewById(R.id.vacancyTitle);
         company = findViewById(R.id.vacancyCompany);
         description = findViewById(R.id.vacancyDescription);
+        title.setText(getIntent().getExtras().getString("title"));
+        company.setText(getIntent().getExtras().getString("company"));
+        description.setText(getIntent().getExtras().getString("description"));
     }
 }

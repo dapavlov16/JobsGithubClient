@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.List;
-
 public class VacancyHolder extends RecyclerView.ViewHolder {
 
     private TextView titleTextView;
@@ -22,7 +20,11 @@ public class VacancyHolder extends RecyclerView.ViewHolder {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(view., VacancyActivity.class);
+                Intent intent = new Intent(v.getContext(),VacancyActivity.class)
+                        .putExtra("title", titleTextView.getText())
+                        .putExtra("company", companyTextView.getText())
+                        .putExtra("description", descriptionTextView.getText());
+                v.getContext().startActivity(intent);
             }
         });
     }
