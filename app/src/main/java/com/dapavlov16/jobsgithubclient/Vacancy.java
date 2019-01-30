@@ -2,14 +2,23 @@ package com.dapavlov16.jobsgithubclient;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 
 @Entity
 public class Vacancy {
-    @PrimaryKey private String id;
-    //private String url;
-    private String title;
+    @PrimaryKey @NonNull
+    private String id;
+    private String type;
+    private String url;
+    private String date;
     private String company;
+    private String companyUrl;
+    private String location;
+    private String title;
     private String description;
+    private String howToApply;
+    private String logo;
 
     public Vacancy(String id, String title, String company, String description){
         this.id = id;
@@ -18,7 +27,63 @@ public class Vacancy {
         this.description = description;
     }
 
-    public String getId() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getCompanyUrl() {
+        return companyUrl;
+    }
+
+    public void setCompanyUrl(String companyUrl) {
+        this.companyUrl = companyUrl;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getHowToApply() {
+        return howToApply;
+    }
+
+    public void setHowToApply(String howToApply) {
+        this.howToApply = howToApply;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public @NonNull String getId() {
         return id;
     }
 

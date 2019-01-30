@@ -32,6 +32,6 @@ public class VacancyHolder extends RecyclerView.ViewHolder {
     public void bind(Vacancy vacancy){
         titleTextView.setText(vacancy.getTitle());
         companyTextView.setText(vacancy.getCompany());
-        descriptionTextView.setText(vacancy.getDescription());
+        descriptionTextView.setText(vacancy.getDescription().substring(0, 10));
     }
 }
