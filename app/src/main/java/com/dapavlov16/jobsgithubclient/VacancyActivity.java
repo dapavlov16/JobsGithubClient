@@ -3,6 +3,7 @@ package com.dapavlov16.jobsgithubclient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
@@ -40,6 +41,6 @@ public class VacancyActivity extends AppCompatActivity {
 
         title.setText(vacancy.getTitle());
         company.setText(vacancy.getCompany());
-        description.setText(vacancy.getDescription());
+        description.setText(Html.fromHtml(vacancy.getDescription()).toString());
     }
 }
