@@ -4,6 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dapavlov16.jobsgithubclient.model.Vacancy;
+
 public class VacancyHolder extends RecyclerView.ViewHolder {
 
     private TextView titleTextView;

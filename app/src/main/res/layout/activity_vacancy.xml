@@ -12,24 +12,33 @@
         android:id="@+id/vacancyTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
         android:text="title"/>
 
     <TextView
         android:id="@+id/vacancyCompany"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
         android:text="company" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/vacancyCompany">
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small">
 
         <TextView
             android:id="@+id/vacancyDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="description" />
+
     </ScrollView>
 
 </LinearLayout>

@@ -2,10 +2,16 @@ package com.dapavlov16.jobsgithubclient;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.dapavlov16.jobsgithubclient.database.VacancyDatabase;
+import com.dapavlov16.jobsgithubclient.model.Vacancy;
+import com.dapavlov16.jobsgithubclient.network.ApiJobs;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -21,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private VacancyDatabase db;
+    private int page = 1;
 
     public static final String KEY_VACANCY = "VACANCY";
 
@@ -40,16 +47,26 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtras(args);
                 MainActivity.this.startActivity(intent);
             }
-        });
+        }, recyclerView);
         recyclerView.setAdapter(adapter);
+        setData(page);
+        page++;
+        adapter.setOnLoadMoreListener(new RecyclerViewAdapter.OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                setData(page);
+            }
+        });
+    }
 
+    public void setData(int page){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jobs.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         ApiJobs apiJobs = retrofit.create(ApiJobs.class);
-        apiJobs.vacancies()
+        apiJobs.vacancies(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableSingleObserver<List<Vacancy>>() {

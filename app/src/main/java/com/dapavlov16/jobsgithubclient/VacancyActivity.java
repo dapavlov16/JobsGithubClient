@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.dapavlov16.jobsgithubclient.model.Vacancy;
+
 public class VacancyActivity extends AppCompatActivity {
 
     private TextView title;
