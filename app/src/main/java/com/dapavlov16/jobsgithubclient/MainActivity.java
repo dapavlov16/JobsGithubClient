@@ -1,17 +1,14 @@
 package com.dapavlov16.jobsgithubclient;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.List;
 
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
@@ -25,14 +22,27 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerViewAdapter adapter;
     private VacancyDatabase db;
 
+    public static final String KEY_VACANCY = "VACANCY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        /*adapter = new RecyclerViewAdapter();
-        recyclerView.setAdapter(adapter);*/
+        adapter = new RecyclerViewAdapter(new RecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Vacancy item) {
+                Intent intent = new Intent(MainActivity.this, VacancyActivity.class);
+                Bundle args = new Bundle();
+                args.putSerializable(KEY_VACANCY, item);
+                intent.putExtras(args);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(adapter);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jobs.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -45,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
                 .subscribe(new DisposableSingleObserver<List<Vacancy>>() {
                     @Override
                     public void onSuccess(final List<Vacancy> vacancyList) {
-                        recyclerView.setAdapter(new RecyclerViewAdapter(vacancyList));
+                        adapter.setItems(vacancyList);
+                        adapter.notifyDataSetChanged();
                         /* Пытаюсь записать лист в базу
                         Completable.fromAction(new Action() {
                             @Override
@@ -67,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });*/
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
