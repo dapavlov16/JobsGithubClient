@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.dapavlov16.jobsgithubclient.database.VacancyDatabase;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
 import static com.dapavlov16.jobsgithubclient.network.NetworkUtils.setData;
@@ -18,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
-    private VacancyDatabase db;
+    //private VacancyDatabase db;
     private int page = 1;
 
     public static final String KEY_VACANCY = "VACANCY";
@@ -51,12 +50,11 @@ public class MainActivity extends AppCompatActivity {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        setData(page, adapter, false);
+        setData(page++, adapter, false);
         adapter.setOnLoadMoreListener(new RecyclerViewAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                page++;
-                setData(page, adapter, false);
+                setData(page++, adapter, false);
             }
         });
     }

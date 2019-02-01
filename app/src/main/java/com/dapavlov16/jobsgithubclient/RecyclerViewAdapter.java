@@ -19,7 +19,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VacancyHolder> {
     private OnLoadMoreListener onLoadMoreListener;
     private int totalItemCount;
     private int lastVisibleItem;
-    private int visibleThreshold = 10;
+    private int visibleThreshold = 15;
+    private boolean isLoading = false;
 
     public RecyclerViewAdapter(OnItemClickListener onItemClickListener, RecyclerView recyclerView) {
         if (onItemClickListener == null) {
@@ -34,8 +35,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VacancyHolder> {
                 super.onScrolled(recyclerView, dx, dy);
                 totalItemCount = layoutManager.getItemCount();
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-                if(totalItemCount <= (lastVisibleItem + visibleThreshold)){
+                if(!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)){
                     if (onLoadMoreListener != null){
+                        isLoading = true;
                         onLoadMoreListener.onLoadMore();
                     }
                 }
@@ -48,6 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VacancyHolder> {
             this.vacancyList.clear();
         }
         this.vacancyList.addAll(vacancyList);
+        isLoading = false;
     }
 
     @NonNull

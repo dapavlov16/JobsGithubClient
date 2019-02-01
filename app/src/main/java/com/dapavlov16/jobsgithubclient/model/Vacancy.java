@@ -12,17 +12,18 @@ public class Vacancy implements Serializable {
     private String id;
     private String type;
     private String url;
-    private String date;
+    private String created_at;
     private String company;
-    private String companyUrl;
+    private String company_url;
     private String location;
     private String title;
     private String description;
-    private String howToApply;
-    private String logo;
+    private String how_to_apply;
+    private String company_logo;
 
-    public Vacancy(String id, String title, String company, String description){
+    public Vacancy(String id, String created_at, String title, String company, String description){
         this.id = id;
+        this.created_at = created_at;
         this.title = title;
         this.company = company;
         this.description = description;
@@ -44,20 +45,20 @@ public class Vacancy implements Serializable {
         this.url = url;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-    public String getCompanyUrl() {
-        return companyUrl;
+    public String getCompany_url() {
+        return company_url;
     }
 
-    public void setCompanyUrl(String companyUrl) {
-        this.companyUrl = companyUrl;
+    public void setCompany_url(String company_url) {
+        this.company_url = company_url;
     }
 
     public String getLocation() {
@@ -68,20 +69,20 @@ public class Vacancy implements Serializable {
         this.location = location;
     }
 
-    public String getHowToApply() {
-        return howToApply;
+    public String getHow_to_apply() {
+        return how_to_apply;
     }
 
-    public void setHowToApply(String howToApply) {
-        this.howToApply = howToApply;
+    public void setHow_to_apply(String how_to_apply) {
+        this.how_to_apply = how_to_apply;
     }
 
-    public String getLogo() {
-        return logo;
+    public String getCompany_logo() {
+        return company_logo;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setCompany_logo(String company_logo) {
+        this.company_logo = company_logo;
     }
 
     public @NonNull String getId() {
