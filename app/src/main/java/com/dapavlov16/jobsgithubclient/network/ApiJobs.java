@@ -6,10 +6,14 @@ import java.util.List;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiJobs {
 
     @GET("positions.json")
     Single<List<Vacancy>> vacancies(@Query("page") int page);
+
+    @GET("positions/{id}.json")
+    Single<Vacancy> vacancy(@Path("id") Object id);
 }
