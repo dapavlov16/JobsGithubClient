@@ -1,17 +1,10 @@
 package com.dapavlov16.jobsgithubclient;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-
-import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.navigation_home:
                         switchFragment(0);
                         return true;
@@ -84,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
-    private void buildFragmentList(){
+    private void buildFragmentList() {
         NavigationFragment homeFragment = buildFragment(1);
         NavigationFragment favoriteFragment = buildFragment(2);
 
@@ -92,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(favoriteFragment);
     }
 
-    private NavigationFragment buildFragment(int fragmentType){
+    private NavigationFragment buildFragment(int fragmentType) {
         NavigationFragment fragment = new NavigationFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(NavigationFragment.ARG_TITLE, fragmentType);
@@ -100,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         return fragment;
     }
 
-    private void switchFragment(int pos){
+    private void switchFragment(int pos) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragments.get(pos))
