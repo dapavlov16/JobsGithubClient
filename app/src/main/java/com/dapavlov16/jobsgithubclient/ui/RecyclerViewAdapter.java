@@ -1,4 +1,4 @@
-package com.dapavlov16.jobsgithubclient;
+package com.dapavlov16.jobsgithubclient.ui;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dapavlov16.jobsgithubclient.R;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
 import java.util.ArrayList;

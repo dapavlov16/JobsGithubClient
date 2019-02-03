@@ -1,4 +1,4 @@
-package com.dapavlov16.jobsgithubclient;
+package com.dapavlov16.jobsgithubclient.ui;
 
 import android.icu.text.SimpleDateFormat;
 import androidx.recyclerview.widget.RecyclerView;
@@ -6,6 +6,7 @@ import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dapavlov16.jobsgithubclient.R;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
 import java.text.ParseException;

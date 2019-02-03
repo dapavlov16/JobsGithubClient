@@ -1,7 +1,7 @@
 package com.dapavlov16.jobsgithubclient.network;
 
 import com.dapavlov16.jobsgithubclient.JobsGithubApp;
-import com.dapavlov16.jobsgithubclient.RecyclerViewAdapter;
+import com.dapavlov16.jobsgithubclient.ui.RecyclerViewAdapter;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
 import java.util.ArrayList;
