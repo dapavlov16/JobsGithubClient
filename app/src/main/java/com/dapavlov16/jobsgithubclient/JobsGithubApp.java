@@ -3,6 +3,7 @@ package com.dapavlov16.jobsgithubclient;
 import android.app.Application;
 
 import com.dapavlov16.jobsgithubclient.network.ApiJobs;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -17,6 +18,9 @@ public class JobsGithubApp extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+
+        AndroidThreeTen.init(this);
+
         apiJobs = new Retrofit.Builder()
                 .baseUrl("https://jobs.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())

@@ -46,4 +46,6 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment:1.0.0-alpha11"
     implementation "android.arch.navigation:navigation-ui:1.0.0-alpha11"
 
+    // datetime
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
 }
