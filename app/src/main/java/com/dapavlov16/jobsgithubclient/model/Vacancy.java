@@ -1,18 +1,24 @@
 package com.dapavlov16.jobsgithubclient.model;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import androidx.annotation.NonNull;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 @Entity
 public class Vacancy implements Serializable {
-    @PrimaryKey @NonNull
+    @PrimaryKey
+    @NonNull
     private String id;
     private String type;
     private String url;
-    private String created_at;
+
+    @SerializedName("created_at")
+    private String createdAt;
+
     private String company;
     private String company_url;
     private String location;
@@ -21,9 +27,9 @@ public class Vacancy implements Serializable {
     private String how_to_apply;
     private String company_logo;
 
-    public Vacancy(String id, String created_at, String title, String company, String description){
+    public Vacancy(String id, String createdAt, String title, String company, String description) {
         this.id = id;
-        this.created_at = created_at;
+        this.createdAt = createdAt;
         this.title = title;
         this.company = company;
         this.description = description;
@@ -45,12 +51,12 @@ public class Vacancy implements Serializable {
         this.url = url;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getCompany_url() {
@@ -85,7 +91,8 @@ public class Vacancy implements Serializable {
         this.company_logo = company_logo;
     }
 
-    public @NonNull String getId() {
+    public @NonNull
+    String getId() {
         return id;
     }
 
