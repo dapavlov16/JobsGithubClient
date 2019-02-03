@@ -1,8 +1,8 @@
 package com.dapavlov16.jobsgithubclient;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +22,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VacancyHolder> {
     private int visibleThreshold = 15;
     private boolean isLoading = false;
 
-    public RecyclerViewAdapter(OnItemClickListener onItemClickListener, RecyclerView recyclerView) {
-        if (onItemClickListener == null) {
-            throw new IllegalArgumentException("onItemClickListener can't be null");
-        }
-        this.onItemClickListener = onItemClickListener;
+    public RecyclerViewAdapter(RecyclerView recyclerView) {
         final LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -79,7 +74,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VacancyHolder> {
         void onLoadMore();
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        if (onItemClickListener == null) {
+            throw new IllegalArgumentException("onItemClickListener can't be null");
+        }
+        this.onItemClickListener = onItemClickListener;
+    }
+
     public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener){
+        if (onLoadMoreListener == null) {
+            throw new IllegalArgumentException("onLoadMoreListener can't be null");
+        }
         this.onLoadMoreListener = onLoadMoreListener;
     }
 }

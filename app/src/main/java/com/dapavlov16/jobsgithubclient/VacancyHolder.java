@@ -1,7 +1,7 @@
 package com.dapavlov16.jobsgithubclient;
 
 import android.icu.text.SimpleDateFormat;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.view.View;
 import android.widget.TextView;

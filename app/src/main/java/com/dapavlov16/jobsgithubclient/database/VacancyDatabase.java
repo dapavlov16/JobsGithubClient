@@ -1,7 +1,7 @@
 package com.dapavlov16.jobsgithubclient.database;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
