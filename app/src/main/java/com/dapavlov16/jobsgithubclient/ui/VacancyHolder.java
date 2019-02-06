@@ -19,7 +19,6 @@ public class VacancyHolder extends RecyclerView.ViewHolder {
     private TextView companyTextView;
     private TextView locationTextView;
     private TextView dateTextView;
-    private DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
 
 
     public VacancyHolder(View view) {
@@ -35,7 +34,7 @@ public class VacancyHolder extends RecyclerView.ViewHolder {
         companyTextView.setText(vacancy.getCompany());
         locationTextView.setText(vacancy.getLocation());
         try {
-            dateTextView.setText(DateUtils.getRelativeTimeSpanString(LocalDateTime.parse(vacancy.getCreatedAt(), dateTime).atZone(ZoneId.of("UTC")).toInstant().toEpochMilli()));
+            dateTextView.setText(DateUtils.getRelativeTimeSpanString(vacancy.getCreatedAt()));
         } catch (Exception ignore) {
         }
         itemView.setOnClickListener(new View.OnClickListener() {

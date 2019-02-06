@@ -1,6 +1,9 @@
 package com.dapavlov16.jobsgithubclient.model;
 
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
+
+import com.dapavlov16.jobsgithubclient.network.DateTimeAdapter;
 
 import java.io.Serializable;
 
@@ -12,13 +15,14 @@ import androidx.room.PrimaryKey;
 public class Vacancy implements Serializable {
     @PrimaryKey
     @NonNull
+    //TODO serialized name it to camelCase format
     private String id;
     private String type;
     private String url;
 
     @SerializedName("created_at")
-    private String createdAt;
-
+    @JsonAdapter(DateTimeAdapter.class)
+    private Long createdAt;
     private String company;
     private String company_url;
     private String location;
@@ -27,7 +31,7 @@ public class Vacancy implements Serializable {
     private String how_to_apply;
     private String company_logo;
 
-    public Vacancy(String id, String createdAt, String title, String company, String description) {
+    public Vacancy(String id, Long createdAt, String title, String company, String description) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -51,11 +55,11 @@ public class Vacancy implements Serializable {
         this.url = url;
     }
 
-    public String getCreatedAt() {
+    public Long getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Long createdAt) {
         this.createdAt = createdAt;
     }
 

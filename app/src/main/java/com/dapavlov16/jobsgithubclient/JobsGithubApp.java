@@ -1,5 +1,9 @@
 package com.dapavlov16.jobsgithubclient;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import android.app.Application;
 
 import com.dapavlov16.jobsgithubclient.network.ApiJobs;
