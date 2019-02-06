@@ -5,13 +5,15 @@
             app:startDestination="@id/fragment_vacancies">
 
     <fragment
-            android:id="@+id/fragment_vacancies"
-            android:name="com.dapavlov16.jobsgithubclient.ui.VacanciesFragment"
-            android:label="fragment_vacancies"
-            tools:layout="@layout/fragment_vacancies">
+        android:id="@+id/fragment_vacancies"
+        android:name="com.dapavlov16.jobsgithubclient.ui.VacanciesFragment"
+        android:label="fragment_vacancies"
+        tools:layout="@layout/fragment_vacancies">
         <action
-                android:id="@+id/action_vacanciesFragment_pop"
-                app:destination="@id/fragment_vacancies"/>
+            android:id="@+id/action_fragment_vacancies_to_fragment_favorites_vacancies"
+            app:destination="@+id/fragment_favorites_vacancies"
+            app:popUpTo="@+id/fragment_favorites_vacancies"
+            app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
@@ -20,7 +22,7 @@
             android:label="fragment_favorites_vacancies"
             tools:layout="@layout/fragment_favorites_vacancies">
         <action
-                android:id="@+id/action_filesFragment_to_recordFragment"
-                app:destination="@id/fragment_vacancies"/>
+            android:id="@+id/action_filesFragment_to_recordFragment"
+            app:destination="@id/fragment_vacancies" />
     </fragment>
 </navigation>

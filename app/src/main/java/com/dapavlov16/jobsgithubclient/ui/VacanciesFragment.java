@@ -30,7 +30,6 @@ public class VacanciesFragment extends Fragment {
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerViewAdapter adapter;
-    private SharedPreferences preferences;
 
 
     public VacanciesFragment() {
@@ -41,10 +40,8 @@ public class VacanciesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_vacancies, container, false);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(rootView.getContext());
 
         swipeRefreshLayout = rootView.findViewById(R.id.srl_update_vacancies);
         recyclerView = rootView.findViewById(R.id.rv_vacancies);
