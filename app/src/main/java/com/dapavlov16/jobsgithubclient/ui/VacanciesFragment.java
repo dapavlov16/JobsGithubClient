@@ -13,6 +13,7 @@ import com.dapavlov16.jobsgithubclient.model.Vacancy;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -43,7 +44,10 @@ public class VacanciesFragment extends Fragment {
 
         swipeRefreshLayout = rootView.findViewById(R.id.srl_update_vacancies);
         recyclerView = rootView.findViewById(R.id.rv_vacancies);
-        recyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setLayoutManager(layoutManager);
 
         adapter = new RecyclerViewAdapter(recyclerView);
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
