@@ -13,8 +13,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="168" />
-                            <option name="y" value="12" />
+                            <option name="x" value="234" />
+                            <option name="y" value="-29" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -34,13 +34,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
+                            <option name="x" value="-90" />
+                            <option name="y" value="-33" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_vacanciesFragment_pop">
+                            <entry key="action_fragment_vacancies_to_fragment_favorites_vacancies">
                               <value>
                                 <LayoutPositions />
                               </value>

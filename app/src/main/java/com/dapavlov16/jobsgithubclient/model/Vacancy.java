@@ -15,7 +15,6 @@ import androidx.room.PrimaryKey;
 public class Vacancy implements Serializable {
     @PrimaryKey
     @NonNull
-    //TODO serialized name it to camelCase format
     private String id;
     private String type;
     private String url;
@@ -24,14 +23,20 @@ public class Vacancy implements Serializable {
     @JsonAdapter(DateTimeAdapter.class)
     private Long createdAt;
     private String company;
-    private String company_url;
+
+    @SerializedName("company_url")
+    private String companyUrl;
     private String location;
     private String title;
     private String description;
-    private String how_to_apply;
-    private String company_logo;
 
-    public Vacancy(String id, Long createdAt, String title, String company, String description) {
+    @SerializedName("how_to_apply")
+    private String howToApply;
+
+    @SerializedName("company_logo")
+    private String companyLogo;
+
+    public Vacancy(@NonNull String id, Long createdAt, String title, String company, String description) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -63,12 +68,12 @@ public class Vacancy implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public String getCompany_url() {
-        return company_url;
+    public String getCompanyUrl() {
+        return companyUrl;
     }
 
-    public void setCompany_url(String company_url) {
-        this.company_url = company_url;
+    public void setCompanyUrl(String companyUrl) {
+        this.companyUrl = companyUrl;
     }
 
     public String getLocation() {
@@ -79,20 +84,20 @@ public class Vacancy implements Serializable {
         this.location = location;
     }
 
-    public String getHow_to_apply() {
-        return how_to_apply;
+    public String getHowToApply() {
+        return howToApply;
     }
 
-    public void setHow_to_apply(String how_to_apply) {
-        this.how_to_apply = how_to_apply;
+    public void setHowToApply(String howToApply) {
+        this.howToApply = howToApply;
     }
 
-    public String getCompany_logo() {
-        return company_logo;
+    public String getCompanyLogo() {
+        return companyLogo;
     }
 
-    public void setCompany_logo(String company_logo) {
-        this.company_logo = company_logo;
+    public void setCompanyLogo(String companyLogo) {
+        this.companyLogo = companyLogo;
     }
 
     public @NonNull
