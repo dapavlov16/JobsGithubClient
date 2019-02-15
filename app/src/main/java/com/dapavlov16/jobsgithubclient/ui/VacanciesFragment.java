@@ -6,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dapavlov16.jobsgithubclient.JobsGithubApp;
 import com.dapavlov16.jobsgithubclient.MainActivity;
 import com.dapavlov16.jobsgithubclient.R;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,8 +21,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import static com.dapavlov16.jobsgithubclient.network.NetworkUtils.setData;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
+import io.reactivex.observers.DisposableSingleObserver;
 
 @SuppressWarnings("FieldCanBeLocal")
 public class VacanciesFragment extends Fragment {
@@ -63,7 +68,8 @@ public class VacanciesFragment extends Fragment {
         adapter.setOnLoadMoreListener(new RecyclerViewAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                setData(page++, adapter, false);
+                page++;
+                init();
             }
         });
         recyclerView.setAdapter(adapter);
@@ -71,11 +77,9 @@ public class VacanciesFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                recyclerView.removeAllViews();
-                swipeRefreshLayout.setRefreshing(true);
-                page = 1;
-                setData(page, adapter, true);
-                swipeRefreshLayout.setRefreshing(false);
+                adapter.setItems(new ArrayList<Vacancy>(),true);
+                page = 0;
+                init();
             }
         });
         return rootView;
@@ -88,6 +92,34 @@ public class VacanciesFragment extends Fragment {
     }
 
     private void init() {
-        setData(page++, adapter, false);
+        JobsGithubApp
+                .getApp()
+                .getDataRepository()
+                .getVacancies(page)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doAfterTerminate(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                })
+                .subscribe(new DisposableSingleObserver<List<Vacancy>>() {
+                    @Override
+                    protected void onStart() {
+                        super.onStart();
+                        swipeRefreshLayout.setRefreshing(true);
+                    }
+
+                    @Override
+                    public void onSuccess(final List<Vacancy> vacancyList) {
+                        adapter.setItems(vacancyList, false);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 }

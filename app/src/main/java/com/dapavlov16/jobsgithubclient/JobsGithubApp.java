@@ -1,14 +1,14 @@
 package com.dapavlov16.jobsgithubclient;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
 import android.app.Application;
 
+import com.dapavlov16.jobsgithubclient.data.DataRepository;
+import com.dapavlov16.jobsgithubclient.data.DataRepositoryImpl;
 import com.dapavlov16.jobsgithubclient.network.ApiJobs;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class JobsGithubApp extends Application {
 
     private static JobsGithubApp app;
-    private ApiJobs apiJobs;
+    private DataRepository dataRepository;
 
     @Override
     public void onCreate() {
@@ -25,12 +25,20 @@ public class JobsGithubApp extends Application {
 
         AndroidThreeTen.init(this);
 
-        apiJobs = new Retrofit.Builder()
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build();
+
+
+        dataRepository = new DataRepositoryImpl(new Retrofit.Builder()
+                .client(client)
                 .baseUrl("https://jobs.github.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
-                .create(ApiJobs.class);
+                .create(ApiJobs.class));
     }
 
 
@@ -38,9 +46,7 @@ public class JobsGithubApp extends Application {
         return app;
     }
 
-    public ApiJobs getApiJobs() {
-        return apiJobs;
+    public DataRepository getDataRepository() {
+        return dataRepository;
     }
-
-
 }

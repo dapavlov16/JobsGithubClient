@@ -22,7 +22,7 @@ public class Vacancy implements Serializable {
 
     @SerializedName("created_at")
     @JsonAdapter(DateTimeAdapter.class)
-    private Long createdAt;
+    private long createdAt;
     private String company;
     private String company_url;
     private String location;
@@ -31,7 +31,7 @@ public class Vacancy implements Serializable {
     private String how_to_apply;
     private String company_logo;
 
-    public Vacancy(String id, Long createdAt, String title, String company, String description) {
+    public Vacancy(String id, long createdAt, String title, String company, String description) {
         this.id = id;
         this.createdAt = createdAt;
         this.title = title;
@@ -55,11 +55,11 @@ public class Vacancy implements Serializable {
         this.url = url;
     }
 
-    public Long getCreatedAt() {
+    public long getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Long createdAt) {
+    public void setCreatedAt(long createdAt) {
         this.createdAt = createdAt;
     }
 

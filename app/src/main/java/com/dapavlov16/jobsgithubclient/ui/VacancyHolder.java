@@ -7,11 +7,10 @@ import android.widget.TextView;
 import com.dapavlov16.jobsgithubclient.R;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.format.DateTimeFormatter;
-
 import androidx.recyclerview.widget.RecyclerView;
+
+import static android.text.format.DateUtils.DAY_IN_MILLIS;
+import static android.text.format.DateUtils.WEEK_IN_MILLIS;
 
 public class VacancyHolder extends RecyclerView.ViewHolder {
 
@@ -34,6 +33,8 @@ public class VacancyHolder extends RecyclerView.ViewHolder {
         companyTextView.setText(vacancy.getCompany());
         locationTextView.setText(vacancy.getLocation());
         try {
+            //long diff = System.currentTimeMillis() - vacancy.getCreatedAt();
+            //long format = diff >= 1000 * 60 * 60 * 24 * 7 ? WEEK_IN_MILLIS : DAY_IN_MILLIS;
             dateTextView.setText(DateUtils.getRelativeTimeSpanString(vacancy.getCreatedAt()));
         } catch (Exception ignore) {
         }
