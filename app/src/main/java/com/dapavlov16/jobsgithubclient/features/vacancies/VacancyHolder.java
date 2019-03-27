@@ -1,4 +1,4 @@
-package com.dapavlov16.jobsgithubclient.ui;
+package com.dapavlov16.jobsgithubclient.features.vacancies;
 
 import android.text.format.DateUtils;
 import android.view.View;
@@ -6,10 +6,6 @@ import android.widget.TextView;
 
 import com.dapavlov16.jobsgithubclient.R;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
-
-import org.threeten.bp.LocalDateTime;
-import org.threeten.bp.ZoneId;
-import org.threeten.bp.format.DateTimeFormatter;
 
 import androidx.recyclerview.widget.RecyclerView;
 

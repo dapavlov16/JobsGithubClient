@@ -1,4 +1,4 @@
-package com.dapavlov16.jobsgithubclient.ui;
+package com.dapavlov16.jobsgithubclient.features.vacancies.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,13 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dapavlov16.jobsgithubclient.MainActivity;
 import com.dapavlov16.jobsgithubclient.R;
+import com.dapavlov16.jobsgithubclient.core.BaseFragment;
+import com.dapavlov16.jobsgithubclient.features.details.activity.VacancyDetailsActivity;
+import com.dapavlov16.jobsgithubclient.features.vacancies.RecyclerViewAdapter;
+import com.dapavlov16.jobsgithubclient.features.vacancies.activity.MainActivity;
+import com.dapavlov16.jobsgithubclient.features.vacancies.viewmodel.VacanciesListViewModel;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,25 +25,26 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import static com.dapavlov16.jobsgithubclient.network.NetworkUtils.setData;
 
 @SuppressWarnings("FieldCanBeLocal")
-public class VacanciesFragment extends Fragment {
-
+public class VacanciesListFragment extends BaseFragment {
 
     private int page = 1;
+
+    private VacanciesListViewModel viewModel;
 
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerViewAdapter adapter;
 
-
-    public VacanciesFragment() {
-        // Required empty public constructor
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewModel = ViewModelProviders.of(this).get(VacanciesListViewModel.class);
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.fragment_vacancies, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_vacancies_list, container, false);
 
 
         swipeRefreshLayout = rootView.findViewById(R.id.srl_update_vacancies);
@@ -53,7 +58,7 @@ public class VacanciesFragment extends Fragment {
         adapter.setOnItemClickListener(new RecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Vacancy item) {
-                Intent intent = new Intent(rootView.getContext(), VacancyActivity.class);
+                Intent intent = new Intent(rootView.getContext(), VacancyDetailsActivity.class);
                 Bundle args = new Bundle();
                 args.putSerializable(MainActivity.KEY_VACANCY, item);
                 intent.putExtras(args);

@@ -1,4 +1,4 @@
-package com.dapavlov16.jobsgithubclient.ui;
+package com.dapavlov16.jobsgithubclient.features.details.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.text.Html;
 import android.widget.TextView;
 
-import com.dapavlov16.jobsgithubclient.MainActivity;
 import com.dapavlov16.jobsgithubclient.R;
+import com.dapavlov16.jobsgithubclient.features.vacancies.activity.MainActivity;
 import com.dapavlov16.jobsgithubclient.model.Vacancy;
 
-public class VacancyActivity extends AppCompatActivity {
+public class VacancyDetailsActivity extends AppCompatActivity {
 
     private TextView title;
     private TextView company;

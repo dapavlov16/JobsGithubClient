@@ -1,8 +1,4 @@
-package com.dapavlov16.jobsgithubclient;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+package com.dapavlov16.jobsgithubclient.core;
 
 import android.app.Application;
 
@@ -12,10 +8,14 @@ import com.jakewharton.threetenabp.AndroidThreeTen;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.terrakok.cicerone.Cicerone;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.Router;
 
 public class JobsGithubApp extends Application {
 
     private static JobsGithubApp app;
+    private Cicerone<Router> cicerone;
     private ApiJobs apiJobs;
 
     @Override
@@ -24,6 +24,7 @@ public class JobsGithubApp extends Application {
         app = this;
 
         AndroidThreeTen.init(this);
+        initCicerone();
 
         apiJobs = new Retrofit.Builder()
                 .baseUrl("https://jobs.github.com/")
@@ -33,6 +34,17 @@ public class JobsGithubApp extends Application {
                 .create(ApiJobs.class);
     }
 
+    private void initCicerone() {
+        cicerone = Cicerone.create();
+    }
+
+    public NavigatorHolder getNavigatorHolder() {
+        return cicerone.getNavigatorHolder();
+    }
+
+    public Router getRouter() {
+        return cicerone.getRouter();
+    }
 
     public static JobsGithubApp getApp() {
         return app;
@@ -44,3 +56,5 @@ public class JobsGithubApp extends Application {
 
 
 }
+
+

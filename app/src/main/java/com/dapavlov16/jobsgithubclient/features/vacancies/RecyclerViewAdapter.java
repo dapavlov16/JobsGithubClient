@@ -1,4 +1,4 @@
-package com.dapavlov16.jobsgithubclient.ui;
+package com.dapavlov16.jobsgithubclient.features.vacancies;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
