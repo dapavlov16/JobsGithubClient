@@ -42,7 +42,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<VacancyHolder> {
     }
 
     public void setItems(List<Vacancy> vacancyList, boolean refresh){
-        if (refresh){
+        if(refresh) {
             this.vacancyList.clear();
         }
         this.vacancyList.addAll(vacancyList);

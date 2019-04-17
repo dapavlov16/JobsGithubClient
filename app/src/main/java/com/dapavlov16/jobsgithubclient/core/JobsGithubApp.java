@@ -3,6 +3,7 @@ package com.dapavlov16.jobsgithubclient.core;
 import android.app.Application;
 
 import com.dapavlov16.jobsgithubclient.network.ApiJobs;
+import com.dapavlov16.jobsgithubclient.repository.VacanciesRepository;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 import retrofit2.Retrofit;
@@ -17,6 +18,7 @@ public class JobsGithubApp extends Application {
     private static JobsGithubApp app;
     private Cicerone<Router> cicerone;
     private ApiJobs apiJobs;
+    private static VacanciesRepository repository;
 
     @Override
     public void onCreate() {
@@ -32,10 +34,19 @@ public class JobsGithubApp extends Application {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
                 .create(ApiJobs.class);
+        initRepository();
     }
 
     private void initCicerone() {
         cicerone = Cicerone.create();
+    }
+
+    private void initRepository() {
+        repository = new VacanciesRepository(apiJobs);
+    }
+
+    public static VacanciesRepository getRepository() {
+        return repository;
     }
 
     public NavigatorHolder getNavigatorHolder() {

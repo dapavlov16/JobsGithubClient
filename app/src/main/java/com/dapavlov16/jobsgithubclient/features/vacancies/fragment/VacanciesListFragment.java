@@ -68,7 +68,8 @@ public class VacanciesListFragment extends BaseFragment {
         adapter.setOnLoadMoreListener(new RecyclerViewAdapter.OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
-                setData(page++, adapter, false);
+                viewModel.updateData(page++);
+                viewModel.setData(adapter);
             }
         });
         recyclerView.setAdapter(adapter);
